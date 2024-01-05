@@ -29,11 +29,13 @@ class GameHalloween:
 
         if str(key) == "'d'":
             self.current_position[0] += 1
-        self.printMap()
         self.questions()
+        
+        self.printMap()
 
     def questions(self):
-        self.resp = input('cuanto es 2*2?:')
+        #TODO 
+        pass
 
     def printMap(self):
         system('cls')
