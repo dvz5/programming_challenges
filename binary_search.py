@@ -1,6 +1,3 @@
-
-
-
 #algoritmo recursivo de busqueda binaria
 def binary_search(n,array):
     size = len(array)
@@ -21,7 +18,6 @@ def binary_search(n,array):
     
     
 #algoritmo de busqueda binaria normal
-
 def binary_search_n(n,array):
     size = len(array)
     mid = int(size/2)

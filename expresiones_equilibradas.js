@@ -1,6 +1,4 @@
 
-
-
 const equilibrar_palabra = (str1, str2) => {
 
     let out1 = ''
