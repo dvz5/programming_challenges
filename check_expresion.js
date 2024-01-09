@@ -14,7 +14,7 @@
 
 //Solution 1
 const check_expresion = (exp) => {
-  const op_soported = "+*/-%";
+  const operators_soported = "+*/-%";
   let ant = "_";
 
   for (let i = 0; i < exp.length; i++) {
@@ -22,10 +22,10 @@ const check_expresion = (exp) => {
       continue;
     }
 
-    const op = op_soported.includes(exp[i])
-    const number = !isNaN(parseInt(exp[i]))
+    const isOperator = operators_soported.includes(exp[i])
+    const isNumber = !isNaN(parseInt(exp[i]))
 
-    if (!op && !number && exp[i] !== '.') {
+    if (!isOperator && !isNumber && exp[i] !== '.') {
       return false
     }
 
@@ -34,22 +34,20 @@ const check_expresion = (exp) => {
       continue;
     }
 
-    if (exp[i] === '.') {
-      if (isNaN(parseInt(ant)) || exp[i - 1] === ' ' || exp[i + 1] === ' ') return false;
+    if (exp[i] === '.' && (isNaN(parseInt(ant)) || exp[i - 1] === ' ' || exp[i + 1] === ' ')) {
+      return false;
     }
 
-    if (number) {
-      if (!op_soported.includes(ant) && isNaN(parseInt(ant)) && ant !== '.') return false;
+    if (isNumber && (!operators_soported.includes(ant) && isNaN(parseInt(ant)) && ant !== '.')) {
+      return false;
     }
 
-    if (op) {
+    if (isOperator) {
       if (exp[i] !== "-" && isNaN(parseInt(ant))) {
         return false
       }
-      if (exp[i] === "-") {
-        if (op_soported.includes(ant) && exp[i + 1] === ' ') {
-          return false
-        }
+      if (exp[i] === "-" && operators_soported.includes(ant) && exp[i + 1] === ' ') {
+        return false
 
       }
     }
