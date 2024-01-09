@@ -16,14 +16,20 @@
 const check_expresion = (exp) => {
   const op_soported = "+*/-%";
   let ant = "_";
+
   for (let i = 0; i < exp.length; i++) {
     if (exp[i] == " ") {
       continue;
     }
+
+    const op = op_soported.includes(exp[i])
+    const number = !isNaN(parseInt(exp[i]))
+
+    if (!op && !number && exp[i] !== '.') {
+      return false
+    }
+
     if (ant === "_") {
-      if (exp[i] !== '-' && isNaN(exp[i])) {
-        return false
-      }
       ant = exp[i];
       continue;
     }
@@ -32,11 +38,11 @@ const check_expresion = (exp) => {
       if (isNaN(parseInt(ant)) || exp[i - 1] === ' ' || exp[i + 1] === ' ') return false;
     }
 
-    if (!isNaN(parseInt(exp[i]))) {
+    if (number) {
       if (!op_soported.includes(ant) && isNaN(parseInt(ant)) && ant !== '.') return false;
     }
 
-    if (op_soported.includes(exp[i])) {
+    if (op) {
       if (exp[i] !== "-" && isNaN(parseInt(ant))) {
         return false
       }
@@ -55,5 +61,5 @@ const check_expresion = (exp) => {
 
 
 
-console.log(check_expresion("-5.2 + -64 / 7 - -4")); //true
+console.log(check_expresion("   -15.2 + -64 / 2 * -4")); //true
 console.log(check_expresion("´s5  * --3 + 3.32 * -56")); //false
