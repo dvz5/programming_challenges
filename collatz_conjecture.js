@@ -23,6 +23,7 @@ const cant_collatz = (n = 1) => {
 };
 
 const call_collatz_range = (a, b) => {
+    console.time('test')
     let max = { number: a, septs: -Infinity }
     for (let i = a; i <= b; i++) {
         const cnt = cant_collatz(i);
@@ -31,6 +32,7 @@ const call_collatz_range = (a, b) => {
             max.number = i
         }
     }
+    console.timeEnd('test')
     return max
 }
-console.log(call_collatz_range(1, 10000000))
+console.log(call_collatz_range(1, 100))
