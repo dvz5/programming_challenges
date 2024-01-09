@@ -13,65 +13,47 @@
  **/
 
 //Solution 1
-const check_exprecion = (string) => {
-  const op = "¿-+/%";
-  let ant = "__";
-  //validate string
-  for (const ch of string) {
-    const current = parseInt(ch);
-
-    if (!op.includes(ch) && isNaN(current) && ch !== " ") {
-      return false;
+const check_expresion = (exp) => {
+  const op_soported = "+*/-%";
+  let ant = "_";
+  for (let i = 0; i < exp.length; i++) {
+    if (exp[i] == " ") {
+      continue;
     }
-
-    if (ant === "__") {
-      ant = ch;
+    if (ant === "_") {
+      if (exp[i] !== '-' && isNaN(exp[i])) {
+        return false
+      }
+      ant = exp[i];
       continue;
     }
 
-    if (ch == " ") continue;
+    if (exp[i] === '.') {
+      if (isNaN(parseInt(ant)) || exp[i - 1] === ' ' || exp[i + 1] === ' ') return false;
+    }
 
-    if (!isNaN(current)) {
-      if (!op.includes(ant) && isNaN(parseInt(ant))) return false;
+    if (!isNaN(parseInt(exp[i]))) {
+      if (!op_soported.includes(ant) && isNaN(parseInt(ant)) && ant !== '.') return false;
     }
-    if (op.includes(ch)) {
-      if (isNaN(parseInt(ant))) return false;
+
+    if (op_soported.includes(exp[i])) {
+      if (exp[i] !== "-" && isNaN(parseInt(ant))) {
+        return false
+      }
+      if (exp[i] === "-") {
+        if (op_soported.includes(ant) && exp[i + 1] === ' ') {
+          return false
+        }
+
+      }
     }
-    ant = ch;
+
+    ant = exp[i];
   }
   return true;
 };
 
-//solution 2 with recursivity
-function check_exprecion2(string, ant = "__") {
-  const op = "*-+/%";
 
-  if (string.length == 0) {
-    return true;
-  }
-  //validate date
-  const current = string.at(0);
-  if (!op.includes(current) && isNaN(current) && current !== " ") {
-    return false;
-  }
-  if (ant === "__") {
-    return check_exprecion2(string.slice(1), current);
-  }
-  if (current == " ") return check_exprecion2(string.slice(1), ant);
 
-  if (!isNaN(current)) {
-    if (!op.includes(ant) && isNaN(parseInt(ant))) return false;
-  }
-  if (op.includes(current)) {
-    if (isNaN(parseInt(ant))) return false;
-  }
-
-  return check_exprecion2(string.slice(1), current);
-}
-
-console.log(check_exprecion("5 +  6 / 7 - 4")); //true
-console.log(check_exprecion("5 - 3 + 3 -/ 56")); //false
-
-console.log(check_exprecion2("5 + 6 / 7 - 4")); //true
-console.log(check_exprecion2("5 - 3 + 3 -/ 56")); //false
-console.log(check_exprecion2("5-1/54*23-1")); //false
+console.log(check_expresion("-5.2 + -64 / 7 - -4")); //true
+console.log(check_expresion("´s5  * --3 + 3.32 * -56")); //false
