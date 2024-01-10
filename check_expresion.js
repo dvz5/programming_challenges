@@ -12,7 +12,6 @@
  * "5 a 6" -> false
  **/
 
-//Solution 1
 const check_expresion = (exp) => {
   const suported_operators = "+*/-%";
   let ant = "_";
