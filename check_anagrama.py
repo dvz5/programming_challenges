@@ -7,22 +7,14 @@
  * - Dos palabras exactamente iguales no son anagrama.
  */ """
 
-def check_anagrama(word1:str,word2:str)-> bool:
-    if(len(word1) != len(word2)):
+
+def isAnagrama(word1: str, word2: str) -> bool:
+    if word1.upper() == word2.upper() or len(word1) != len(word2):
         return False
-    
-    for letter in word1.lower():
-        if(letter not in word2.lower()):
+    for i in range(len(word1)):
+        if not word1[i] in word2 or not word2[i] in word1 or word1.count(word1[i]) != word2.count(word1[i]):
             return False
     return True
-    
-    
-print(check_anagrama('Romina','Marino'))
 
-    
-    
-    
-    
-    
-    
-    
+
+print(isAnagrama("caraa", "crraa"))
