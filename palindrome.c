@@ -4,7 +4,6 @@
 
 bool isPalindrome(char text[])
 {
-
     int size_text = strlen(text);
 
     for (int i = 0; i < (int)(size_text / 2); i++)

@@ -8,12 +8,14 @@
  *   y [4, 2, 4]).
  * """
 
-def calc_bumerang(array:list)->list:
+
+def calc_bumerang(array: list) -> list:
     boomerangs = []
-    for i in range(0,len(array)-2):
-        if array[i]==array[i+2]:
+    for i in range(0, len(array)-2):
+        if array[i] == array[i+2]:
             boomerangs.append(array[i:i+3])
-            
+
     return boomerangs
-        
+
+
 print(calc_bumerang([2, 1, 2, 3, 3, 4, 2, 4]))
